@@ -1,5 +1,5 @@
-=== Auto Content Inserter ===
-Tags: content, insert
+=== Publish approval ===
+Tags: content, quality control, publish, approval
 Requires at least: 4.6
 Tested up to: 4.6
 Requires PHP: 5.6
@@ -7,10 +7,16 @@ Stable tag: trunk
 License: MIT
 License URI: https://opensource.org/licenses/MIT
 
-Automatically insert some specific content into all of your posts at a specified position. Great for automatically adding a newsletter subscription widget.
+Disallow publishing content until it is approved by a specified number of people.
 
 == Description ==
-Automatically insert some specific content into all of your posts at a specified position. Great for automatically adding a newsletter subscription widget. The position is declared in percentage and a simple algorithm tries to find a place between two block-elements (paragraph/list/div) that is closest to the declared one.
+This plugin allows selecting content types (post, page, custom) that are subject to quality control, where specified
+editors have to approve them before they cna be published.
+
+Features:
+1. Separate configuration for each content type.
+2. Define list of users who can approve content.
+3. Define the minimum number of approvals requires for the content to be publishable.
 
 == Installation ==
-After activating the plugin go to its settings page to specify the declared position and the content to use.
+After activating the plugin go to its settings to decide which content types should be subject to the approval process.
