@@ -38,14 +38,9 @@ require_once __DIR__ . '/src/services/ApprovalTools.php';
 require_once __DIR__ . '/src/ui/AdminBodyClassHandler.php';
 require_once __DIR__ . '/src/ui/ApprovalBoxes.php';
 
-function _aic_activate_hook()
+function _pubapprove_activate_hook()
 {
 	PublishApprovalPlugin::activateHook();
-}
-
-function _aic_uninstall_hook()
-{
-	PublishApprovalPlugin::uninstallHook();
 }
 
 class PublishApprovalPlugin
@@ -58,10 +53,6 @@ class PublishApprovalPlugin
 				'publish-approval'
 			), Constants::getOptionsUrl())
 		);
-	}
-
-	public static function uninstallHook()
-	{
 	}
 
 	public static function adminNotices()
@@ -80,18 +71,20 @@ class PublishApprovalPlugin
 
 		add_action('admin_init', [self::class, 'handleAdminInit']);
 
-		register_activation_hook(__FILE__, '_aic_activate_hook');
-		register_uninstall_hook(__FILE__, '_aic_uninstall_hook');
+		register_activation_hook(__FILE__, '_pubapprove_activate_hook');
 
-		add_action('admin_menu', function () {
-			ECPlugin::registerMenu(
-				'Publish approval',
-				'Publish approval',
-				Constants::CAPABILITY_EDIT_OPTIONS,
-				Constants::MENU_SLUG,
-				__DIR__ . '/templates/admin-view.php'
-			);
-		});
+		if (is_admin()){
+			add_action('admin_menu', function () {
+				ECPlugin::registerMenu(
+					'Publish approval',
+					'Publish approval',
+					Constants::CAPABILITY_EDIT_OPTIONS,
+					Constants::MENU_SLUG,
+					__DIR__ . '/templates/admin-view.php'
+				);
+			});
+			add_action('plugins_loaded', [self::class, 'loadPluginTextDomain']);
+		}
 	}
 
 	public static function handleAdminInit()
@@ -101,7 +94,6 @@ class PublishApprovalPlugin
 		add_action('post_submitbox_start', [ApprovalBoxes::class, 'renderApprovalBox']);
 
 		add_action('admin_notices', [self::class, 'adminNotices']);
-		add_action('plugins_loaded', [self::class, 'loadPluginTextDomain']);
 		add_action('admin_enqueue_scripts', [self::class, 'registerScriptsAndStyles']);
 
 		add_action('wp_insert_post_data', [HandlePublishCircumvent::class, 'filterPostData'], 10, 1);

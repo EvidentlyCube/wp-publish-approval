@@ -21,9 +21,9 @@ class ApprovalSettings
 		}
 
 		return [
-			'enabled' => false, // @Todo should be false
-			'editors' => [1], // @Todo Should be empty array
-			'requiredApprovals' => 1 // @Todo temporary
+			'enabled' => false,
+			'editors' => [],
+			'requiredApprovals' => 0
 		];
 	}
 

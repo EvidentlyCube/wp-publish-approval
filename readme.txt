@@ -1,7 +1,7 @@
 === Publish approval ===
 Tags: content, quality control, publish, approval
 Requires at least: 4.6
-Tested up to: 4.6
+Tested up to: 4.9
 Requires PHP: 5.6
 Stable tag: trunk
 License: MIT
@@ -17,6 +17,13 @@ Features:
 1. Separate configuration for each content type.
 2. Define list of users who can approve content.
 3. Define the minimum number of approvals requires for the content to be publishable.
+
+== Screenshots ==
+
+1. Settings page
+2. Publish widget when the logged-in user can approve a post
+4. Publish widget with blocked approval because the logged-in user can't approve your own posts
+5. Publish widget with post ready to be published or unapproved
 
 == Installation ==
 After activating the plugin go to its settings to decide which content types should be subject to the approval process.

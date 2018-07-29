@@ -18,6 +18,7 @@ class ApprovalState
 
 	private static $isInitialized;
 	private static $isInValidContext;
+	private static $postId;
 
 	public static function handleScreenSet()
 	{
@@ -56,6 +57,7 @@ class ApprovalState
 		self::$canApprove = in_array(self::$currentUserId, self::$options['editors'], false);
 		self::$isAlreadyPublished = false;
 		self::$isPostByCurrentUser = false;
+		self::$postId = $postId;
 
 		if ($postId) {
 			$post = get_post($postId);
@@ -116,6 +118,11 @@ class ApprovalState
 	public static function getApprovals()
 	{
 		return self::$approvals;
+	}
+
+	public static function getPostId()
+	{
+		return self::$postId;
 	}
 
 	public static function hasUserApproved()
