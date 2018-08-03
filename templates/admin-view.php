@@ -67,7 +67,7 @@ function _render_options($selected = '')
 								id="approvals-<?php echo $name; ?>-required"
 								name="approvals[<?php echo $name; ?>][required]"
 								type="number"
-								min="1" max="999" step="1"
+								min="0" max="999" step="1"
 								value="<?php echo $options['requiredApprovals']; ?>">
 					</td>
 				</tr>
