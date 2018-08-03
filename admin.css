@@ -33,3 +33,7 @@ table.form-table tr.subrow td {
     vertical-align: middle;
     padding: 5px;
 }
+
+#publish-approval-settings .header-row {
+    font-size: 30px;
+}

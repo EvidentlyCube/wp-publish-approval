@@ -30,6 +30,10 @@ class HandleOptionsSave
 			);
 		}
 
+		$optionsArray[ApprovalSettings::BEHAVIOR_GROUP_OPTION] = [
+			ApprovalSettings::ALLOW_SELF_APPROVE_OPTION => isset($_POST['approvals-self-approve']) ? true : false
+		];
+
 		ApprovalSettings::updateOptions($optionsArray);
 		wp_redirect(Constants::getOptionsUrl());
 	}

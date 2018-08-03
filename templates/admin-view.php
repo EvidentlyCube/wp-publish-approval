@@ -29,6 +29,11 @@ function _render_options($selected = '')
 		<input type="hidden" name="action" value="publish_save_option">
 		<table id="publish-approval-settings" class="form-table ">
 			<tbody>
+			<tr>
+				<th class="header-row" colspan="2">
+					Approvals
+				</th>
+			</tr>
 			<?php foreach ($postTypes as $postType): ?>
 				<?php
 				$name = $postType->name;
@@ -99,6 +104,33 @@ function _render_options($selected = '')
 					</td>
 				</tr>
 			<?php endforeach; ?>
+
+
+			<tr>
+				<th class="header-row" colspan="2">
+					Behavior
+				</th>
+			</tr>
+			<tr>
+				<th>
+					<label for="approvals-self-approve">
+						<?php _e('Self approval:', 'publish-approval'); ?>
+					</label>
+				</th>
+				<td>
+					<input
+							id="approvals-self-approve"
+							name="approvals-self-approve"
+							class="toggle-enable"
+							type="checkbox"
+						<?php echo ApprovalSettings::canAuthorApproveTheirOwnContent() ? 'checked' : ''; ?>>
+					<label for="approvals-self-approve">
+						<?php _e('Allow authors to approve their own posts.', 'publish-approval'); ?>
+					</label>
+				</td>
+			</tr>
+
+
 			<tr id="users-template" class="hidden">
 				<th>
 					<label for="approvals-%name%-editors-%$index%">

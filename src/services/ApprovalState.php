@@ -94,17 +94,14 @@ class ApprovalState
 
 	public static function getCanApproveThisPost()
 	{
-		return self::$canApprove && !self::$isPostByCurrentUser;
+		return self::$canApprove && (
+				!self::$isPostByCurrentUser || ApprovalSettings::canAuthorApproveTheirOwnContent()
+			);
 	}
 
 	public static function getCanApproveThisType()
 	{
 		return self::$canApprove;
-	}
-
-	public static function getIsPostByCurrentUser()
-	{
-		return self::$isPostByCurrentUser;
 	}
 
 	public static function getIsAlreadyPublished()

@@ -6,6 +6,9 @@ class ApprovalSettings
 {
 	const OPTION_NAME = 'ec_publish_approval_options';
 
+	const BEHAVIOR_GROUP_OPTION = '_behavior';
+	const ALLOW_SELF_APPROVE_OPTION = 'self_approve';
+
 	private static $options;
 
 	public static function updateOptions($options)
@@ -25,6 +28,15 @@ class ApprovalSettings
 			'editors' => [],
 			'requiredApprovals' => 0
 		];
+	}
+
+	public static function canAuthorApproveTheirOwnContent()
+	{
+		$options = self::getOptions();
+
+		return isset($options[self::BEHAVIOR_GROUP_OPTION][self::ALLOW_SELF_APPROVE_OPTION])
+			? $options[self::BEHAVIOR_GROUP_OPTION][self::ALLOW_SELF_APPROVE_OPTION]
+			: false;
 	}
 
 	private static function getOptions()
