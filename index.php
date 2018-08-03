@@ -22,6 +22,7 @@ use EC_PublishApproval\HandleAuthorChange;
 use EC_PublishApproval\HandleOptionsSave;
 use EC_PublishApproval\HandlePublishCircumvent;
 use EC_PublishApproval\HandleUnapproval;
+use EC_PublishApproval\PluginIntegration_Polylang;
 
 require_once __DIR__ . '/ECPlugin.php';
 require_once __DIR__ . '/src/Constants.php';
@@ -31,6 +32,7 @@ require_once __DIR__ . '/src/actions/HandleOptionsSave.php';
 require_once __DIR__ . '/src/actions/HandlePublishCircumvent.php';
 require_once __DIR__ . '/src/actions/HandleUnapproval.php';
 require_once __DIR__ . '/src/model/Approval.php';
+require_once __DIR__ . '/src/pluginIntegration/PluginIntegration_Polylang.php';
 require_once __DIR__ . '/src/services/ApprovalSettings.php';
 require_once __DIR__ . '/src/services/ApprovalState.php';
 require_once __DIR__ . '/src/services/ApprovalStore.php';
@@ -103,6 +105,8 @@ class PublishApprovalPlugin
 		add_action('save_post', [ApprovalState::class, 'handlePostSaved'], 0, 3);
 		add_action('save_post', [HandleApproval::class, 'handlePostSaved'], 10, 3);
 		add_action('save_post', [HandleUnapproval::class, 'handlePostSaved'], 10, 3);
+
+		PluginIntegration_Polylang::adminInit();
 	}
 
 	public static function registerScriptsAndStyles()
