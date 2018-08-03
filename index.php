@@ -3,7 +3,7 @@
  * Plugin Name: Publish Approval
  * Description: Disallow publishing content until it is approved by a specified number of people
  * Author: Maurycy Zarzycki Evidently Cube
- * Version: 0.1
+ * Version: 1.1
  * Requires PHP: 5.6
  * Requires at least: 4.6
  * Text Domain: publish-approval

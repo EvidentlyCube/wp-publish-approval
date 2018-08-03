@@ -4,7 +4,7 @@ namespace EC_PublishApproval;
 
 class Constants
 {
-	const VERSION = '0.1.0';
+	const VERSION = '1.1.0';
 	const MENU_SLUG = 'publish-approval';
 
 	const META_APPROVAL_PREFIX = 'approval_by_';
