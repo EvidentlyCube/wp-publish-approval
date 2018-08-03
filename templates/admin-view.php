@@ -23,7 +23,7 @@ function _render_options($selected = '')
 <div class="wrap">
 	<h1 class="wp-heading-inline"><?php _e('Publish approval', 'publish-approval'); ?></h1>
 
-	<p><?php _e('plugin-description', 'publish-approval'); ?></p>
+	<p><?php _e('Select which types of content should require approvals before publish is available. The ones you enabled will have publishing blocked unless the specified number of approvals has been gathered.', 'publish-approval'); ?></p>
 
 	<form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>">
 		<input type="hidden" name="action" value="publish_save_option">
