@@ -8,6 +8,8 @@ class ApprovalSettings
 
 	const BEHAVIOR_GROUP_OPTION = '_behavior';
 	const ALLOW_SELF_APPROVE_OPTION = 'self_approve';
+	const BLOCK_PUBLISHED_EDIT_OPTION = 'block_published_edit';
+	const ADMIN_ONLY_UNPUBLISH_OPTION = 'admin_only_unpublish';
 
 	private static $options;
 
@@ -36,6 +38,33 @@ class ApprovalSettings
 
 		return isset($options[self::BEHAVIOR_GROUP_OPTION][self::ALLOW_SELF_APPROVE_OPTION])
 			? $options[self::BEHAVIOR_GROUP_OPTION][self::ALLOW_SELF_APPROVE_OPTION]
+			: false;
+	}
+
+	public static function canEditPublished()
+	{
+		$options = self::getOptions();
+
+		return isset($options[self::BEHAVIOR_GROUP_OPTION][self::BLOCK_PUBLISHED_EDIT_OPTION])
+			? !$options[self::BEHAVIOR_GROUP_OPTION][self::BLOCK_PUBLISHED_EDIT_OPTION]
+			: true;
+	}
+
+	public static function canUpdatePublished()
+	{
+		$options = self::getOptions();
+
+		return isset($options[self::BEHAVIOR_GROUP_OPTION][self::BLOCK_PUBLISHED_EDIT_OPTION])
+			? !$options[self::BEHAVIOR_GROUP_OPTION][self::BLOCK_PUBLISHED_EDIT_OPTION]
+			: true;
+	}
+
+	public static function canOnlyAdminUnpublish()
+	{
+		$options = self::getOptions();
+
+		return isset($options[self::BEHAVIOR_GROUP_OPTION][self::ADMIN_ONLY_UNPUBLISH_OPTION])
+			? $options[self::BEHAVIOR_GROUP_OPTION][self::ADMIN_ONLY_UNPUBLISH_OPTION]
 			: false;
 	}
 

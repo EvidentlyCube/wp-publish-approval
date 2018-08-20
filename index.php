@@ -19,6 +19,7 @@ use EC_PublishApproval\ECPlugin;
 use EC_PublishApproval\EcPluginNotifications;
 use EC_PublishApproval\HandleApproval;
 use EC_PublishApproval\HandleAuthorChange;
+use EC_PublishApproval\HandleBlockEditing;
 use EC_PublishApproval\HandleOptionsSave;
 use EC_PublishApproval\HandlePublishCircumvent;
 use EC_PublishApproval\HandleUnapproval;
@@ -28,6 +29,7 @@ require_once __DIR__ . '/ECPlugin.php';
 require_once __DIR__ . '/src/Constants.php';
 require_once __DIR__ . '/src/actions/HandleApproval.php';
 require_once __DIR__ . '/src/actions/HandleAuthorChange.php';
+require_once __DIR__ . '/src/actions/HandleBlockEditing.php';
 require_once __DIR__ . '/src/actions/HandleOptionsSave.php';
 require_once __DIR__ . '/src/actions/HandlePublishCircumvent.php';
 require_once __DIR__ . '/src/actions/HandleUnapproval.php';
@@ -37,6 +39,7 @@ require_once __DIR__ . '/src/services/ApprovalSettings.php';
 require_once __DIR__ . '/src/services/ApprovalState.php';
 require_once __DIR__ . '/src/services/ApprovalStore.php';
 require_once __DIR__ . '/src/services/ApprovalTools.php';
+require_once __DIR__ . '/src/services/PostHelpers.php';
 require_once __DIR__ . '/src/ui/AdminBodyClassHandler.php';
 require_once __DIR__ . '/src/ui/ApprovalBoxes.php';
 
@@ -60,6 +63,7 @@ class PublishApprovalPlugin
 	public static function adminNotices()
 	{
 		EcPluginNotifications::printNotifications();
+		HandleBlockEditing::printNotifications();
 	}
 
 	public static function loadPluginTextDomain()
@@ -75,7 +79,7 @@ class PublishApprovalPlugin
 
 		register_activation_hook(__FILE__, '_pubapprove_activate_hook');
 
-		if (is_admin()){
+		if (is_admin()) {
 			add_action('admin_menu', function () {
 				ECPlugin::registerMenu(
 					'Publish approval',
@@ -98,8 +102,12 @@ class PublishApprovalPlugin
 		add_action('admin_notices', [self::class, 'adminNotices']);
 		add_action('admin_enqueue_scripts', [self::class, 'registerScriptsAndStyles']);
 
+		add_filter('the_editor', [HandleBlockEditing::class, 'makeCodeEditorReadonly']);
+		add_filter('tiny_mce_before_init', [HandleBlockEditing::class, 'makeTinyMceReadonly']);
+
 		add_action('wp_insert_post_data', [HandlePublishCircumvent::class, 'filterPostData'], 10, 1);
 		add_action('wp_insert_post_data', [HandleAuthorChange::class, 'filterPostData'], 20, 2);
+		add_action('wp_insert_post_data', [HandleBlockEditing::class, 'stripUnsaveableData'], 30);
 		add_action('admin_post_publish_save_option', [HandleOptionsSave::class, 'handleActionOptionsUpdate']);
 
 		add_action('save_post', [ApprovalState::class, 'handlePostSaved'], 0, 3);

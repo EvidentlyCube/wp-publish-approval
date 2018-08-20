@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Publish approval\n"
-"POT-Creation-Date: 2018-08-03 07:56+0200\n"
-"PO-Revision-Date: 2018-08-03 07:57+0200\n"
+"POT-Creation-Date: 2018-08-20 23:04+0200\n"
+"PO-Revision-Date: 2018-08-20 23:05+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -15,7 +15,7 @@ msgstr ""
 "X-Poedit-KeywordsList: __;_e\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: index.php:54
+#: index.php:57
 #, php-format
 msgid ""
 "<strong>Publish Approval</strong> has been enabled. <a href=\"%s\">Click "
@@ -27,6 +27,10 @@ msgstr ""
 #: src/actions/HandleApproval.php:29
 msgid "Failed to save approval, please try again."
 msgstr "Failed to save approval, please try again."
+
+#: src/actions/HandleBlockEditing.php:11
+msgid "This page cannot be edited because it is published."
+msgstr "This page cannot be edited because it is published."
 
 #: src/actions/HandlePublishCircumvent.php:21
 msgid "Post cannot be published, not enough approvals."
@@ -75,15 +79,15 @@ msgstr "Enable approvals for:"
 msgid "Required approvals:"
 msgstr "Required approvals:"
 
-#: templates/admin-view.php:83 templates/admin-view.php:137
+#: templates/admin-view.php:83 templates/admin-view.php:179
 msgid "Editor:"
 msgstr "Editor:"
 
-#: templates/admin-view.php:90 templates/admin-view.php:144
+#: templates/admin-view.php:90 templates/admin-view.php:186
 msgid "--SELECT--"
 msgstr "--SELECT--"
 
-#: templates/admin-view.php:93 templates/admin-view.php:147
+#: templates/admin-view.php:93 templates/admin-view.php:189
 msgid "Remove"
 msgstr "Remove"
 
@@ -95,11 +99,27 @@ msgstr "Add editor"
 msgid "Self approval:"
 msgstr "Self approval:"
 
-#: templates/admin-view.php:128
+#: templates/admin-view.php:129
 msgid "Allow authors to approve their own posts."
 msgstr "Allow authors to approve their own posts."
 
-#: templates/admin-view.php:154
+#: templates/admin-view.php:138
+msgid "Block published:"
+msgstr "Block published:"
+
+#: templates/admin-view.php:150
+msgid "Published posts will not be editable."
+msgstr "Published posts will not be editable."
+
+#: templates/admin-view.php:158
+msgid "Admin-only unpublish:"
+msgstr "Admin-only unpublish:"
+
+#: templates/admin-view.php:170
+msgid "Published posts will only be unpublishable by administrators."
+msgstr "Published posts will only be unpublishable by administrators."
+
+#: templates/admin-view.php:196
 msgid "Save Changes"
 msgstr "Save Changes"
 

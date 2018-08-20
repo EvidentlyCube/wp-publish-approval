@@ -15,6 +15,7 @@ class ApprovalState
 	private static $isAlreadyPublished;
 	private static $currentUserId;
 	private static $isPostByCurrentUser;
+	private static $isCurrentUserAdmin;
 
 	private static $isInitialized;
 	private static $isInValidContext;
@@ -52,6 +53,7 @@ class ApprovalState
 	private static function loadState($postType, $postId)
 	{
 		self::$currentUserId = get_current_user_id();
+		self::$isCurrentUserAdmin = current_user_can('administrator');
 		self::$options = ApprovalSettings::getForType($postType);
 		self::$approvals = $postId ? ApprovalStore::getPostApprovals($postId) : [];
 		self::$canApprove = in_array(self::$currentUserId, self::$options['editors'], false);
@@ -125,5 +127,24 @@ class ApprovalState
 	public static function hasUserApproved()
 	{
 		return ApprovalTools::hasApprovalFromUser(self::$currentUserId, self::$approvals);
+	}
+
+	public static function isEditingBlocked()
+	{
+		return !ApprovalSettings::canEditPublished() && self::isEnabled() && self::getIsAlreadyPublished();
+	}
+
+	public static function canChangeStatus()
+	{
+		if (self::getIsAlreadyPublished()) {
+			return self::$isCurrentUserAdmin || !ApprovalSettings::canOnlyAdminUnpublish();
+		}
+
+		return self::hasEnoughApprovals();
+	}
+
+	public static function canSave()
+	{
+		return !self::getIsAlreadyPublished() || self::canChangeStatus();
 	}
 }

@@ -31,7 +31,9 @@ class HandleOptionsSave
 		}
 
 		$optionsArray[ApprovalSettings::BEHAVIOR_GROUP_OPTION] = [
-			ApprovalSettings::ALLOW_SELF_APPROVE_OPTION => isset($_POST['approvals-self-approve']) ? true : false
+			ApprovalSettings::ALLOW_SELF_APPROVE_OPTION => isset($_POST['approvals-self-approve']) ? true : false,
+			ApprovalSettings::BLOCK_PUBLISHED_EDIT_OPTION => isset($_POST['approvals-block-published']) ? true : false,
+			ApprovalSettings::ADMIN_ONLY_UNPUBLISH_OPTION => isset($_POST['approvals-admin-only-unpublish']) ? true : false,
 		];
 
 		ApprovalSettings::updateOptions($optionsArray);

@@ -12,6 +12,10 @@ body.ec-approval-type-available:not(.ec-approval-available) input#approve {
     cursor: not-allowed;
 }
 
+body.ec-approval-update-blocked #publishing-action input[type="submit"] {
+    cursor: not-allowed;
+}
+
 #approval-list h3 {
     margin-top: 0;
     line-height: 30px;

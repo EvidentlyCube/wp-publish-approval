@@ -123,9 +123,51 @@ function _render_options($selected = '')
 							name="approvals-self-approve"
 							class="toggle-enable"
 							type="checkbox"
+							autocomplete="0"
 						<?php echo ApprovalSettings::canAuthorApproveTheirOwnContent() ? 'checked' : ''; ?>>
 					<label for="approvals-self-approve">
 						<?php _e('Allow authors to approve their own posts.', 'publish-approval'); ?>
+					</label>
+				</td>
+			</tr>
+
+
+			<tr>
+				<th>
+					<label for="approvals-block-published">
+						<?php _e('Block published:', 'publish-approval'); ?>
+					</label>
+				</th>
+				<td>
+					<input
+							id="approvals-block-published"
+							name="approvals-block-published"
+							class="toggle-enable"
+							type="checkbox"
+							autocomplete="0"
+						<?php echo !ApprovalSettings::canEditPublished() ? 'checked' : ''; ?>>
+					<label for="approvals-block-published">
+						<?php _e('Published posts will not be editable.', 'publish-approval'); ?>
+					</label>
+				</td>
+			</tr>
+
+			<tr>
+				<th>
+					<label for="approvals-block-published">
+						<?php _e('Admin-only unpublish:', 'publish-approval'); ?>
+					</label>
+				</th>
+				<td>
+					<input
+							id="approvals-admin-only-unpublish"
+							name="approvals-admin-only-unpublish"
+							class="toggle-enable"
+							type="checkbox"
+							autocomplete="0"
+						<?php echo ApprovalSettings::canOnlyAdminUnpublish() ? 'checked' : ''; ?>>
+					<label for="approvals-admin-only-unpublish">
+						<?php _e('Published posts will only be unpublishable by administrators.', 'publish-approval'); ?>
 					</label>
 				</td>
 			</tr>
